@@ -1,0 +1,315 @@
+/* Attributes Selection */
+
+.attributes-selection {
+  width: 100%;
+}
+
+.attributes-selection .description {
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+  width: 70%;
+}
+
+.attributes-selection .selected {
+  background-color: #fecc4b;
+  border: 2px solid #ffc0cb;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  margin: 5px;
+}
+
+.attributes-selection .short-name {
+  margin: 5px;
+  padding: 5px;
+  text-align: left;
+  width: 30%;
+}
+
+.attributes-selection .unselected {
+  border: 2px solid #ffc0cb;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  margin: 5px;
+}
+
+/* Attributes Viewing */
+
+.attributes-viewing {
+  width: 100%;
+}
+
+.attributes-viewing > .row {
+  border: 2px solid #ffc0cb;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.attributes-viewing > .row:hover {
+  background-color: #ffc0cb;
+}
+
+.attributes-viewing > .row > .description {
+  display: inline-block;
+}
+
+.attributes-viewing > .row > .short-name {
+  background-color: #fecc4b;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 0px 5px 0px 5px;
+  padding: 10px;
+  text-align: center;
+  width: 20%;
+}
+
+/* Cluster Comparison */
+
+.cluster-comparison .glyph {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.cluster-comparison .glyph button {
+  border-color: #28a745;
+  border-radius: 5px;
+  color: #28a745;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 14px;
+  height: 30px;
+  width: 160px;
+  user-select: none;
+}
+
+/* Face */
+
+.face > .dial > circle {
+  cursor: grab;
+  fill: #808080;
+}
+
+.face > .dial > polygon {
+  fill: #80807833;
+}
+
+.face > .highlight-range > path {
+  fill-rule: evenodd;
+}
+
+.face > .legend > text {
+  font-family: sans-serif;
+  font-size: 13px;
+  user-select: none;
+}
+
+.face > .press-circle {
+  cursor: pointer;
+}
+
+.face > .numeric-value {
+  font-family: monospace;
+  font-size: 13px;
+  user-select: none;
+}
+
+/* K-Means Clustering */
+
+.k-means-clustering > .selected {
+  background-color: #d5f4e6;
+  border: 0px;
+  color: #000000;
+  margin: 10px;
+  padding: 10px;
+}
+
+.k-means-clustering > .unselected {
+  background-color: transparent;
+  border: 0px;
+  color: #007bff;
+  cursor: pointer;
+  margin: 10px;
+  padding: 10px;
+}
+
+/* KNN Prediction */
+
+.knn-prediction {
+  font-size: 12px;
+}
+
+.knn-prediction .face-selected {
+  border: 5px green solid;
+  display: inline-block;
+  margin: 5px;
+}
+
+.knn-prediction .face-unselected {
+  border: 5px transparent solid;
+  display: inline-block;
+  margin: 5px;
+}
+
+.knn-prediction .face-selected:hover {
+  cursor: pointer;
+}
+
+.knn-prediction .face-unselected:hover {
+  cursor: pointer;
+}
+
+/* Manual Clustering */
+
+.manual-clustering > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.manual-clustering > .unmoved:hover {
+  cursor: grab;
+}
+
+.manual-clustering > .moved:hover {
+  cursor: pointer;
+}
+
+/* Mapping */
+
+.mapping {
+  width: 100%;
+}
+
+.mapping .centered {
+  text-align: center;
+}
+
+.mapping .header {
+  background-color: #ffffff;
+  border: 2px solid #004d00;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 10px;
+  line-height: 10px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.mapping .left-mapping {
+  display: inline-flex;
+  flex-direction: column;
+  height: 225px;
+  justify-content: space-between;
+  vertical-align: bottom;
+  width: 50%;
+}
+
+.mapping .left-mapping .left-row {
+  background-color: #d5f4e6;
+  font-family: sans-serif;
+  font-size: 10px;
+  line-height: 40px;
+  padding-left: 5px;
+}
+
+.mapping .right-mapping {
+  background-color: #ffffcc;
+  display: inline-block;
+  height: 225px;
+  overflow-y: scroll;
+  vertical-align: bottom;
+  width: 50%;
+}
+
+.mapping .right-mapping .right-row {
+  margin: 5px;
+}
+
+/* Points Viewing */
+
+.points-viewing {
+  border-collapse: collapse;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.points-viewing > tbody > tr > td {
+  border-top: 1px solid #dee2e6;
+  padding: 5px;
+}
+
+.points-viewing > tbody > tr > td > img {
+  height: 100px;
+  vertical-align: middle;
+}
+
+/* Plot */
+
+.plot > text {
+  font-family: sans-serif;
+  font-size: 10px;
+  text-anchor: middle;
+  user-select: none;
+}
+
+.plot > .scale > text {
+  dominant-baseline: central;
+  font-family: sans-serif;
+  font-size: 8px;
+  text-anchor: end;
+  user-select: none;
+}
+
+/* Router */
+
+.router > a {
+  font-family: sans-serif;
+  margin-right: 10px;
+}
+
+.router > hr {
+  border: 1px solid #000000;
+}
+
+/* Slider Table */
+
+.slider-table .face-glyph {
+  display: inline-block;
+}
+
+.slider-table table {
+  border-bottom: 1px solid #dee2e6;
+  border-collapse: collapse;
+  margin: 10px 0px 10px 0px;
+}
+
+.slider-table table tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.slider-table table tbody tr td {
+  border-top: 1px solid #dee2e6;
+  min-width: 80px;
+  padding: 10px;
+}
+
+.slider-table table thead tr th {
+  border-top: 1px solid #dee2e6;
+  min-width: 80px;
+  padding: 10px;
+}
+
+/* Star */
+
+.star > .legend > text {
+  font-family: sans-serif;
+  font-size: 13px;
+  text-anchor: middle;
+  user-select: none;
+}
+
+.star > .press-circle {
+  cursor: pointer;
+}
