@@ -109,9 +109,10 @@
   cursor: pointer;
 }
 
-.face > .numeric-value {
+.face > .numeric-value > text {
+  dominant-baseline: hanging;
   font-family: monospace;
-  font-size: 13px;
+  font-size: 10px;
   user-select: none;
 }
 
