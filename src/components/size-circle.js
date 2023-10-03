@@ -10,12 +10,13 @@ export default function SizeCircle({
     { color: '#2472c8', opacity: 0.9 },
   ],
   // Optional properties
+  gap = 3,
   offset = { x: 0, y: 0 },
   strokeWidth = 2,
 }) {
   // Get coordinates
-  let x1 = offset.x;
-  let x2 = offset.x + 200;
+  let x1 = offset.x + strokeWidth;
+  let x2 = offset.x + 200 - strokeWidth;
   let y = offset.y + 120;
 
   // Build circles
@@ -23,7 +24,7 @@ export default function SizeCircle({
     .slice(0, datas.length - 1)
     .map((data, i) => (
       <path
-        d={`M ${x1} ${y + i * 10} A 50 50 0 0 1 ${x2} ${y + i * 10}`}
+        d={`M ${x1} ${y + i * gap} A 49 49 0 0 1 ${x2} ${y + i * gap}`}
         fill="none"
         key={i}
         stroke={data.color}

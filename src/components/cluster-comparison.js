@@ -46,6 +46,7 @@ export default function ClusterComparison({
   shortNames = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
   // Optional properties
   callbackState = (state) => console.log(state),
+  gap = 3,
   interval = 100,
   initialState = null,
   zoom = 1,
@@ -110,7 +111,7 @@ export default function ClusterComparison({
     let fromCentroid = initialState === null ? false : initialState.actives1[i];
     if (glyphType === 'face') {
       let width = zoom * 300;
-      let height = zoom * 240 + (datasOfCluster.length - 1) * zoom * 10 + 35;
+      let height = zoom * 240 + (datasOfCluster.length - 1) * zoom * gap + 35;
       let style = { height: height, width: width };
       let translateX = `translateX(${(zoom * 240 - 160) / 2}px)`;
       let button = actives1[i] ? (

@@ -49,6 +49,7 @@ export default function Face({
   color = 'auto',
   dialRadius = 7,
   fromCentroid = false,
+  gap = 3,
   interval = 100,
   isPressable = true,
   opacity = 'auto',
@@ -71,28 +72,23 @@ export default function Face({
   let [value, setValue] = React.useState(fromCentroid ? 10 : 0);
 
   // Get size
-  let rawWidth = 200;
-  let rawHeight = 240;
-  let viewWidth = rawWidth;
-  let viewHeight = rawHeight;
-  let width = rawWidth * zoom;
-  let height = rawHeight * zoom;
+  let viewWidth = 200;
+  let viewHeight = 240;
   if (showLegend || showNumericValue) {
     viewWidth *= 1.5;
-    width *= 1.5;
   } else if (showDial || showProgressRing) {
     viewWidth *= 1.2;
-    width *= 1.2;
   }
   if (showSizeCircle) {
-    viewHeight += (datas.length - 1) * 10;
-    height += (datas.length - 1) * zoom * 10;
+    viewHeight += (datas.length - 1) * gap;
   }
+  let width = viewWidth * zoom;
+  let height = viewHeight * zoom;
 
   // Get offset
   let offset = {
     x: showDial || showProgressRing ? 20 : 0,
-    y: showSizeCircle ? (datas.length - 1) * 10 : 0,
+    y: showSizeCircle ? (datas.length - 1) * gap : 0,
   };
 
   // Get head
@@ -149,6 +145,7 @@ export default function Face({
         color: data.color,
         opacity: data.opacities[1] * coef2,
       }))}
+      gap={gap}
       offset={{ ...offset, y: 0 }}
       strokeWidth={strokeWidth}
     />
