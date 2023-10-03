@@ -3,7 +3,7 @@ import React from 'react';
 export default function Dial({
   // Necessary properties
   callback = (dValue) => console.log(dValue),
-  refOffset = { x: 8, y: 8 },
+  faceRef = null,
   // Optional properties
   dialRadius = 7,
   offset = { x: 0, y: 0 },
@@ -30,8 +30,8 @@ export default function Dial({
     document.addEventListener('mouseup', mouseUp);
   };
   let mouseMove = (e) => {
-    let dX = e.clientX - refOffset.x - cx * zoom;
-    let dY = e.clientY - refOffset.y - cy * zoom;
+    let dX = e.clientX - faceRef.current.getBoundingClientRect().x - cx * zoom;
+    let dY = e.clientY - faceRef.current.getBoundingClientRect().y - cy * zoom;
     let newDegree = (Math.atan2(dX, -dY) * 180) / Math.PI;
     newDegree += newDegree < 0 ? 360 : 0;
     let newDistance = Math.sqrt(dX * dX + dY * dY) / zoom;

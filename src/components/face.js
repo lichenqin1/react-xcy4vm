@@ -68,7 +68,6 @@ export default function Face({
     degree: 180,
     distance: 98,
   });
-  let [refOffset, setRefOffset] = React.useState({ x: 8, y: 8 });
   let [value, setValue] = React.useState(fromCentroid ? 10 : 0);
 
   // Get size
@@ -104,12 +103,6 @@ export default function Face({
   // Get coefficients
   let coef1 = !isPressable ? 1 : value / 10;
   let coef2 = !isPressable ? 1 : 1 - value / 10;
-
-  // Mouse function
-  let mouseEnter = () => {
-    let rect = ref.current.getBoundingClientRect();
-    setRefOffset({ x: rect.x, y: rect.y });
-  };
 
   // Build highlight range
   let highlightRange = showHighlightRange ? (
@@ -189,7 +182,7 @@ export default function Face({
     <Dial
       callback={(dValue) => setDValue(dValue)}
       dialRadius={dialRadius}
-      refOffset={refOffset}
+      faceRef={ref}
       offset={offset}
       zoom={zoom}
     />
@@ -205,7 +198,6 @@ export default function Face({
     <svg
       className="face"
       height={height}
-      onMouseEnter={showDial ? mouseEnter : () => {}}
       ref={ref}
       viewBox={[0, 0, viewWidth, viewHeight]}
       width={width}
