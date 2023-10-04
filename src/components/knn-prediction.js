@@ -59,7 +59,7 @@ export default function KNNPrediction({
   },
   zoom = 0.5,
   range = { min: [-20, 0, 0, 0, 0], max: [20, 3000, 50, 20, 20] },
-  shortNames = ['Eyebrow', 'Eye', 'Nose', 'Cheek', 'Mouth'],
+  shortNames = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
   url = 'https://hammerhead-app-9pl8l.ondigitalocean.app/api/algorithms/knn',
 }) {
   // Preprocess the query points
