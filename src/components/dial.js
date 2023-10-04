@@ -40,18 +40,12 @@ export default function Dial({
   let mouseMove = (e) => {
     let dX = e.clientX - faceRef.current.getBoundingClientRect().x - cx * zoom;
     let dY = e.clientY - faceRef.current.getBoundingClientRect().y - cy * zoom;
-    let newDegree = (Math.atan2(dX, -dY) * 180) / Math.PI;
-    newDegree += newDegree < 0 ? 360 : 0;
-    let newDistance = Math.sqrt(dX * dX + dY * dY) / zoom;
-    if (newDistance < 90) {
-      newDistance = 90;
-    } else if (newDistance > 130) {
-      newDistance = 130;
-    }
+    let d = (Math.atan2(-dX, dY) * 180) / Math.PI + 180;
+    let r = Math.min(Math.max(Math.sqrt(dX * dX + dY * dY) / zoom, 90), 130);
     setDValue((dValue) => ({
       ...dValue,
-      degree: newDegree,
-      distance: newDistance,
+      degree: d,
+      distance: r,
     }));
   };
   let mouseUp = () => {
