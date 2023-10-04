@@ -20,7 +20,7 @@ export default function SliderTable({
     max: [100, 100, 100, 100, 100],
   },
   rightData = { color: '#0000ff', point: [10, 30, 50, 70, 90] },
-  shortNames = ['Eyebrow', 'Eye', 'Nose', 'Cheek', 'Mouth'],
+  shortNames = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
   tableHeaders = ['Data Attribute', 'Value', 'Slider', 'Visual Feature'],
   zoom = 1,
 }) {
