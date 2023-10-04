@@ -11,35 +11,18 @@ export default function ManualClustering({
   color = '#000000',
   initialState = null,
   points = [
-    // [10, 10, 10, 10, 10],
-    // [20, 20, 20, 20, 20],
-    // [30, 30, 30, 30, 30],
-    // [40, 40, 40, 40, 40],
-    // [50, 50, 50, 50, 50],
-    // [60, 60, 60, 60, 60],
-    // [70, 70, 70, 70, 70],
-    // [80, 80, 80, 80, 80],
-    // [90, 90, 90, 90, 90],
-    [8, 2530, 14.1, 16, 13],
-    [13, 1550, 30, 6, 18],
-    [10, 1500, 26, 8, 17],
-    [13, 1640, 22, 6, 18],
-    [15, 1720, 28, 9, 18],
-    [15, 1560, 25, 7, 14],
-    [12, 1500, 23, 7, 16],
-    [-12, 210, 3, 1, 0],
-    [-1, 325, 5, 3, 0],
-    [-2, 300, 4, 2, 0],
-    [-4, 331, 3, 4, 1],
-    [-4, 320, 3, 2, 0],
+    [10, 10, 10, 10, 10],
+    [20, 20, 20, 20, 20],
+    [30, 30, 30, 30, 30],
+    [40, 40, 40, 40, 40],
+    [50, 50, 50, 50, 50],
+    [60, 60, 60, 60, 60],
+    [70, 70, 70, 70, 70],
+    [80, 80, 80, 80, 80],
+    [90, 90, 90, 90, 90],
   ],
   zoom = 0.5,
-  // range = {
-  //   min: [0, 0, 0, 0, 0],
-  //   mean: [50, 50, 50, 50, 50],
-  //   max: [100, 100, 100, 100, 100],
-  // },
-  range = { min: [-20, 0, 0, 0, 0], max: [20, 3000, 50, 20, 20] },
+  range = { min: [0, 0, 0, 0, 0], max: [100, 100, 100, 100, 100] },
   shortNames = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
 }) {
   // Hook
@@ -119,16 +102,16 @@ export default function ManualClustering({
           callback={() => {}}
           color="auto"
           datas={cluster.indexes.map((index) => unmovedDatas[index])}
-          dialRadius={7}
+          dialRadius={14}
           fromCentroid={false}
           interval={100}
           isPressable={false}
           opacity="auto"
           range={null}
-          shortNames={null}
+          shortNames={shortNames}
           showDial={false}
           showHighlightRange={false}
-          showLegend={false}
+          showLegend={true}
           showNumericValue={false}
           showProgressRing={false}
           showSizeCircle={true}
@@ -163,7 +146,7 @@ export default function ManualClustering({
           isPressable={false}
           opacity={1}
           shortNames={shortNames}
-          showLegend={false}
+          showLegend={true}
           strokeWidth={2}
           zoom={zoom}
         />
@@ -176,16 +159,16 @@ export default function ManualClustering({
           callback={() => {}}
           color="auto"
           datas={[movedDatas[i]]}
-          dialRadius={7}
+          dialRadius={14}
           fromCentroid={false}
           interval={100}
           isPressable={false}
           opacity="auto"
           range={null}
-          shortNames={null}
+          shortNames={shortNames}
           showDial={false}
           showHighlightRange={false}
-          showLegend={false}
+          showLegend={true}
           showNumericValue={false}
           showProgressRing={false}
           showSizeCircle={false}
@@ -220,7 +203,7 @@ export default function ManualClustering({
           isPressable={false}
           opacity={1}
           shortNames={shortNames}
-          showLegend={false}
+          showLegend={true}
           strokeWidth={2}
           zoom={zoom}
         />

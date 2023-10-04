@@ -6,13 +6,6 @@ import Star from './star';
 import Slider from './slider';
 
 export default function SliderTable({
-  features = [
-    'Eyebrow Slant',
-    'Eye Size',
-    'Nose Length',
-    'Cheek Size',
-    'Mouth Curve',
-  ],
   leftData = { color: '#000000', nPoint: [0.5, 0.5, 0.5, 0.5, 0.5] },
   longNames = [
     'Long name of eyebrow',
@@ -34,6 +27,24 @@ export default function SliderTable({
   // Hook
   let [glyphType, setGlyphType] = React.useState('face');
   let [leftNPoint, setLeftNPoint] = React.useState(leftData.nPoint);
+
+  // Get features
+  let features = [
+    'Feature 1',
+    'Feature 2',
+    'Feature 3',
+    'Feature 4',
+    'Feature 5',
+  ];
+  if (glyphType === 'face') {
+    features = [
+      'Eyebrow Slant',
+      'Eye Size',
+      'Nose Length',
+      'Cheek Size',
+      'Mouth Curve',
+    ];
+  }
 
   // Get right normalized point
   let rightNPoint = rightData.point.map(
@@ -96,7 +107,7 @@ export default function SliderTable({
           callback={() => {}}
           color="auto"
           datas={leftDatas}
-          dialRadius={7}
+          dialRadius={14}
           fromCentroid={false}
           interval={100}
           isPressable={false}
@@ -116,7 +127,7 @@ export default function SliderTable({
           callback={() => {}}
           color="auto"
           datas={rightDatas}
-          dialRadius={7}
+          dialRadius={14}
           fromCentroid={false}
           interval={100}
           isPressable={false}

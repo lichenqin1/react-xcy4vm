@@ -1,6 +1,9 @@
 import React from 'react';
 import { HashRouter, Link, Route, Routes } from 'react-router-dom';
 
+import Face from './face';
+import Star from './star';
+import Plot from './plot';
 import AttributesSelection from './attributes-selection';
 import AttributesViewing from './attributes-viewing';
 import ClusterComparison from './cluster-comparison';
@@ -15,6 +18,9 @@ export default function Router({
   // Necessary property
   components = [
     { element: null, path: '' },
+    { element: <Face />, path: 'face' },
+    { element: <Star />, path: 'star' },
+    { element: <Plot />, path: 'plot' },
     { element: <AttributesViewing />, path: 'attributes-viewing' },
     { element: <PointsViewing />, path: 'points-viewing' },
     { element: <Mapping />, path: 'mapping' },

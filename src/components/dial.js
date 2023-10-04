@@ -5,7 +5,7 @@ export default function Dial({
   callback = (dValue) => console.log(dValue),
   faceRef = null,
   // Optional properties
-  dialRadius = 7,
+  dialRadius = 14,
   offset = { x: 0, y: 0 },
   zoom = 1,
 }) {
@@ -13,7 +13,7 @@ export default function Dial({
   let [dValue, setDValue] = React.useState({
     active: false,
     degree: 180,
-    distance: 98,
+    distance: 110,
   });
 
   // Get coordinates
@@ -22,6 +22,14 @@ export default function Dial({
   let x1 = cx - dialRadius;
   let x2 = cx + dialRadius;
   let y = cy - dValue.distance;
+
+  // Get triangles
+  let triangles = [
+    [cx - 4, y - 6, cx + 4, y - 6, cx, y - 11],
+    [cx + 6, y - 4, cx + 6, y + 4, cx + 11, y],
+    [cx - 4, y + 6, cx + 4, y + 6, cx, y + 11],
+    [cx - 6, y - 4, cx - 6, y + 4, cx - 11, y],
+  ];
 
   // Mouse functions
   let mouseDown = () => {
@@ -35,10 +43,10 @@ export default function Dial({
     let newDegree = (Math.atan2(dX, -dY) * 180) / Math.PI;
     newDegree += newDegree < 0 ? 360 : 0;
     let newDistance = Math.sqrt(dX * dX + dY * dY) / zoom;
-    if (newDistance < 86) {
-      newDistance = 86;
-    } else if (newDistance > 110) {
-      newDistance = 110;
+    if (newDistance < 90) {
+      newDistance = 90;
+    } else if (newDistance > 130) {
+      newDistance = 130;
     }
     setDValue((dValue) => ({
       ...dValue,
@@ -47,7 +55,7 @@ export default function Dial({
     }));
   };
   let mouseUp = () => {
-    setDValue((dValue) => ({ ...dValue, distance: 98 }));
+    setDValue((dValue) => ({ ...dValue, distance: 110 }));
     document.removeEventListener('mousemove', mouseMove);
     document.removeEventListener('mouseup', mouseUp);
   };
@@ -58,8 +66,14 @@ export default function Dial({
   // Return Dial
   return (
     <g className="dial" transform={`rotate(${[dValue.degree, cx, cy]})`}>
-      <polygon points={[cx, cy, x1, y, x2, y]} />
-      <circle cx={cx} cy={y} r={dialRadius} onMouseDown={mouseDown} />
+      <polygon className="body" points={[cx, cy, x1, y, x2, y]} />
+      <g className="head" onMouseDown={mouseDown}>
+        <circle cx={cx} cy={y} r={dialRadius} />
+        <polygon points={triangles[0]} />
+        <polygon points={triangles[1]} />
+        <polygon points={triangles[2]} />
+        <polygon points={triangles[3]} />
+      </g>
     </g>
   );
 }

@@ -62,6 +62,16 @@ export default function KNNPrediction({
   shortNames = ['Eyebrow', 'Eye', 'Nose', 'Cheek', 'Mouth'],
   url = 'https://hammerhead-app-9pl8l.ondigitalocean.app/api/algorithms/knn',
 }) {
+  // Preprocess the query points
+  query.points = query.points.map((point) =>
+    point.map((_, i) => {
+      if (i === query.index) {
+        return range.min[query.index];
+      }
+      return point[i];
+    })
+  );
+
   // Hooks
   let [glyphType, setGlyphType] = React.useState('face');
   let [k, setK] = React.useState(initialState === null ? 2 : initialState.k);
@@ -108,16 +118,16 @@ export default function KNNPrediction({
               opacities: [1, 1],
             },
           ]}
-          dialRadius={7}
+          dialRadius={14}
           fromCentroid={false}
           interval={100}
           isPressable={false}
           opacity="auto"
           range={null}
-          shortNames={null}
+          shortNames={shortNames}
           showDial={false}
           showHighlightRange={false}
-          showLegend={false}
+          showLegend={true}
           showNumericValue={false}
           showProgressRing={false}
           showSizeCircle={false}
@@ -170,7 +180,7 @@ export default function KNNPrediction({
           isPressable={false}
           opacity={1}
           shortNames={shortNames}
-          showLegend={false}
+          showLegend={true}
           strokeWidth={2}
           zoom={zoom}
         />
@@ -280,7 +290,7 @@ export default function KNNPrediction({
         callback={() => {}}
         color="auto"
         datas={neighborsFaces}
-        dialRadius={7}
+        dialRadius={14}
         fromCentroid={false}
         interval={100}
         isPressable={false}
@@ -346,7 +356,7 @@ export default function KNNPrediction({
         callback={() => {}}
         color="auto"
         datas={actualFace}
-        dialRadius={7}
+        dialRadius={14}
         fromCentroid={false}
         interval={100}
         isPressable={false}

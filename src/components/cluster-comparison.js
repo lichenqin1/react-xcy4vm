@@ -110,10 +110,18 @@ export default function ClusterComparison({
   let glyphs = datasOfClusters.map((datasOfCluster, i) => {
     let fromCentroid = initialState === null ? false : initialState.actives1[i];
     if (glyphType === 'face') {
-      let width = zoom * 300;
-      let height = zoom * 240 + (datasOfCluster.length - 1) * zoom * gap + 35;
+      let rawWidth = 200;
+      let rawHeight = 240;
+      let viewWidth = rawWidth;
+      let viewHeight = rawHeight;
+      viewWidth *= 1.5;
+      viewHeight += (datasOfCluster.length - 1) * gap;
+      viewWidth += 60;
+      viewHeight += 60;
+      let width = viewWidth * zoom;
+      let height = viewHeight * zoom + 35;
       let style = { height: height, width: width };
-      let translateX = `translateX(${(zoom * 240 - 160) / 2}px)`;
+      let translateX = `translateX(${(zoom * (rawHeight + 60) - 160) / 2}px)`;
       let button = actives1[i] ? (
         <button onClick={changeActives2(i)} style={{ transform: translateX }}>
           {actives2[i] ? 'Take Back Centroid' : 'Overlay Centroid'}
@@ -125,7 +133,7 @@ export default function ClusterComparison({
             callback={changeActives1(i)}
             color="auto"
             datas={datasOfCluster}
-            dialRadius={7}
+            dialRadius={14}
             fromCentroid={fromCentroid}
             interval={interval}
             isPressable={true}
@@ -211,7 +219,7 @@ export default function ClusterComparison({
         callback={() => {}}
         color="auto"
         datas={datasOfCentroids}
-        dialRadius={7}
+        dialRadius={14}
         fromCentroid={false}
         interval={interval}
         isPressable={false}

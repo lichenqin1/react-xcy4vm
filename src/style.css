@@ -86,13 +86,22 @@
 
 /* Face */
 
-.face > .dial > circle {
-  cursor: grab;
-  fill: #808080;
+.face > .dial > .body {
+  fill: #80807833;
 }
 
-.face > .dial > polygon {
-  fill: #80807833;
+.face > .dial > .head {
+  cursor: grab;
+}
+
+.face > .dial > .head > circle {
+  fill: #c0c0c0;
+  stroke: #808080;
+  stroke-width: 2px;
+}
+
+.face > .dial > .head > polygon {
+  fill: #808080;
 }
 
 .face > .highlight-range > path {
@@ -109,10 +118,9 @@
   cursor: pointer;
 }
 
-.face > .numeric-value > text {
-  dominant-baseline: hanging;
+.face > .numeric-value {
   font-family: monospace;
-  font-size: 10px;
+  font-size: 13px;
   user-select: none;
 }
 

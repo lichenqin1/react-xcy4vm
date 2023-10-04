@@ -19,7 +19,6 @@ export default function Mapping({
   color = '#000000',
   callbackState = (state) => console.log(state),
   faceNPoint = { old: [0, 0, 0, 0, 0], new: [0.5, 0.5, 0.5, 0.5, 0.5] },
-  features = ['Feature A', 'Feature B', 'Feature C', 'Feature D', 'Feature E'],
   initialState = null,
   zoom = 1,
   range = {
@@ -34,13 +33,31 @@ export default function Mapping({
     initialState === null ? faceNPoint.old : initialState.nPoint
   );
   let [leftHeaders, setLeftHeaders] = React.useState(
-    initialState === null ? features.map(() => null) : initialState.leftHeaders
+    initialState === null ? new Array(5).fill(null) : initialState.leftHeaders
   );
   let [rightHeaders, setRightHeaders] = React.useState(
     initialState === null
       ? attributes.map((attribute) => attribute.header)
       : initialState.rightHeaders
   );
+
+  // Get features
+  let features = [
+    'Feature 1',
+    'Feature 2',
+    'Feature 3',
+    'Feature 4',
+    'Feature 5',
+  ];
+  if (glyphType === 'face') {
+    features = [
+      'Eyebrow Slant',
+      'Eye Size',
+      'Nose Length',
+      'Cheek Size',
+      'Mouth Curve',
+    ];
+  }
 
   // Get map from headers to long names
   let headerToLongName = {};
@@ -203,18 +220,18 @@ export default function Mapping({
         callback={() => {}}
         color="auto"
         datas={datas}
-        dialRadius={7}
+        dialRadius={14}
         fromCentroid={false}
         interval={100}
         isPressable={false}
         opacity="auto"
         range={null}
-        shortNames={null}
-        showDial={false}
-        showHighlightRange={false}
-        showLegend={false}
+        shortNames={features}
+        showDial={true}
+        showHighlightRange={true}
+        showLegend={true}
         showNumericValue={false}
-        showProgressRing={false}
+        showProgressRing={true}
         showSizeCircle={false}
         strokeWidth={2}
         zoom={zoom}

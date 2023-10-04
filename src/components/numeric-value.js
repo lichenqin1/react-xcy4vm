@@ -11,7 +11,6 @@ export default function NumericValue({
   // Optional properties
   color = '#ff0000',
   offset = { x: 0, y: 0 },
-  numFmt = (num) => `${num}`,
 }) {
   // Get eyebrow
   let lEyebrowIn = 319 < dValue.degree && dValue.degree < 348;
@@ -48,57 +47,34 @@ export default function NumericValue({
     index = 4;
   }
 
-  // Get position
-  let x = offset.x;
-  let y = offset.y;
-  if (lEyebrowIn) {
-    y += 25;
-  } else if (rEyebrowIn) {
-    x += 165;
-    y += 35;
-  } else if (lEyeIn) {
-    x -= 15;
-    y += 80;
-  } else if (rEyeIn) {
-    x += 170;
-    y += 80;
-  } else if (noseIn) {
-    x += 40;
-    y += 160;
-  } else if (lCheekIn) {
-    x -= 10;
-    y += 160;
-  } else if (rCheekIn) {
-    x += 185;
-    y += 120;
-  } else if (mouthIn) {
-    x += 150;
-    y += 165;
+  // Build key
+  let key = 'MEAN';
+  if (dValue.distance < 95) {
+    key = 'MIN';
+  } else if (dValue.distance > 125) {
+    key = 'MAX';
   }
 
   // Build value
-  let minValue = index < 0 ? 0 : range.min[index];
-  let meanValue = index < 0 ? 0 : range.mean[index];
-  let maxValue = index < 0 ? 0 : range.max[index];
+  let value = index < 0 ? 0 : range.mean[index];
+  if (index >= 0 && dValue.distance < 95) {
+    value = range.min[index];
+  } else if (index >= 0 && dValue.distance > 125) {
+    value = range.max[index];
+  }
 
   // Build text
-  let minText = `MIN: ${numFmt(minValue)}`;
-  let meanText = `MEAN: ${numFmt(meanValue)}`;
-  let maxText = `MAX: ${numFmt(maxValue)}`;
+  let text = index >= 0 ? `${key}: ${value}` : null;
 
   // Return NumericValue
-  return index === -1 ? null : (
-    <g className="numeric-value">
-      <rect x={x} y={y} fill="#80808020" width="70" height="40" />
-      <text fill="#fd9357" x={x} y={y + 5}>
-        {minText}
-      </text>
-      <text fill="black" x={x} y={y + 15}>
-        {meanText}
-      </text>
-      <text fill="#fd9357" x={x} y={y + 25}>
-        {maxText}
-      </text>
-    </g>
+  return (
+    <text
+      className="numeric-value"
+      fill={color}
+      x={offset.x + 210}
+      y={offset.y + 150}
+    >
+      {text}
+    </text>
   );
 }

@@ -47,7 +47,7 @@ export default function Face({
   shortNames = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon'],
   // Optional properties
   color = 'auto',
-  dialRadius = 7,
+  dialRadius = 14,
   fromCentroid = false,
   gap = 3,
   interval = 100,
@@ -82,13 +82,15 @@ export default function Face({
   if (showSizeCircle) {
     viewHeight += (datas.length - 1) * gap;
   }
+  viewWidth += 60;
+  viewHeight += 60;
   let width = viewWidth * zoom;
   let height = viewHeight * zoom;
 
   // Get offset
   let offset = {
-    x: showDial || showProgressRing ? 20 : 0,
-    y: showSizeCircle ? (datas.length - 1) * gap : 0,
+    x: showDial || showProgressRing ? 50 : 30,
+    y: showSizeCircle ? (datas.length - 1) * gap + 30 : 30,
   };
 
   // Get head
@@ -146,7 +148,7 @@ export default function Face({
         opacity: data.opacities[1] * coef2,
       }))}
       gap={gap}
-      offset={{ ...offset, y: 0 }}
+      offset={{ ...offset, y: 30 }}
       strokeWidth={strokeWidth}
     />
   ) : null;
@@ -199,6 +201,13 @@ export default function Face({
       viewBox={[0, 0, viewWidth, viewHeight]}
       width={width}
     >
+      {/* Static components */}
+      {highlightRange}
+      {expressions}
+      {numericValue}
+      {progressRing}
+      {sizeCircle}
+      {legend}
       {/* Head */}
       <circle
         cx={offset.x + 100}
@@ -212,13 +221,6 @@ export default function Face({
       {/* Eyeballs */}
       <circle cx={offset.x + 52} cy={offset.y + 100} r={3} />
       <circle cx={offset.x + 144} cy={offset.y + 100} r={3} />
-      {/* Static components */}
-      {highlightRange}
-      {expressions}
-      {numericValue}
-      {progressRing}
-      {sizeCircle}
-      {legend}
       {/* Interactive components */}
       {pressCircle}
       {dial}
