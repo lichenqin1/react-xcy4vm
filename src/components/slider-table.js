@@ -8,11 +8,11 @@ import Slider from './slider';
 export default function SliderTable({
   leftData = { color: '#000000', nPoint: [0.5, 0.5, 0.5, 0.5, 0.5] },
   longNames = [
-    'Long name of eyebrow',
-    'Long name of eye',
-    'Long name of nose',
-    'Long name of cheek',
-    'Long name of mouth',
+    'Long name of alpha',
+    'Long name of beta',
+    'Long name of gamma',
+    'Long name of delta',
+    'Long name of epsilon',
   ],
   range = {
     min: [0, 0, 0, 0, 0],
