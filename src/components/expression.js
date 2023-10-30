@@ -1,5 +1,6 @@
 import React from 'react';
-import * as d3 from 'd3';
+
+import { basisCurve, cardinalCurve } from '../utils/path';
 
 export default function Expression({
   // Necessary properties
@@ -30,18 +31,6 @@ export default function Expression({
   } else if (opacity > 1) {
     opacity = 1;
   }
-
-  // Curve functions
-  let basis = d3
-    .line()
-    .x((d) => d.x)
-    .y((d) => d.y)
-    .curve(d3.curveBasisClosed);
-  let cardinal = d3
-    .line()
-    .x((d) => d.x)
-    .y((d) => d.y)
-    .curve(d3.curveCardinalClosed);
 
   // Get eyebrows
   let lEyebrowX = offset.x + 44;
@@ -278,14 +267,14 @@ export default function Expression({
       />
       {/* Eyes */}
       <path
-        d={basis(lEyeVar)}
+        d={basisCurve(lEyeVar)}
         fill="none"
         stroke={color}
         strokeOpacity={opacity}
         strokeWidth={strokeWidth}
       />
       <path
-        d={basis(rEyeVar)}
+        d={basisCurve(rEyeVar)}
         fill="none"
         stroke={color}
         strokeOpacity={opacity}
@@ -293,7 +282,7 @@ export default function Expression({
       />
       {/* Nose */}
       <path
-        d={cardinal(noseVar)}
+        d={cardinalCurve(noseVar)}
         fill="none"
         stroke={color}
         strokeOpacity={opacity}
@@ -301,14 +290,14 @@ export default function Expression({
       />
       {/* Cheeks */}
       <path
-        d={basis(lCheekVar)}
+        d={basisCurve(lCheekVar)}
         fill="none"
         stroke={color}
         strokeOpacity={opacity}
         strokeWidth={strokeWidth}
       />
       <path
-        d={basis(rCheekVar)}
+        d={basisCurve(rCheekVar)}
         fill="none"
         stroke={color}
         strokeOpacity={opacity}
@@ -316,7 +305,7 @@ export default function Expression({
       />
       {/* Mouth */}
       <path
-        d={cardinal(mouthVar)}
+        d={cardinalCurve(mouthVar)}
         fill="none"
         stroke={color}
         strokeOpacity={opacity}

@@ -1,5 +1,6 @@
 import React from 'react';
-import * as d3 from 'd3';
+
+import { basisCurve, cardinalCurve } from '../utils/path';
 
 export default function HighlightRange({
   // Necessary property
@@ -8,18 +9,6 @@ export default function HighlightRange({
   color = '#fd935759',
   offset = { x: 0, y: 0 },
 }) {
-  // Curve functions
-  let basis = d3
-    .line()
-    .x((d) => d.x)
-    .y((d) => d.y)
-    .curve(d3.curveBasisClosed);
-  let cardinal = d3
-    .line()
-    .x((d) => d.x)
-    .y((d) => d.y)
-    .curve(d3.curveCardinalClosed);
-
   // Get eyebrows
   let lEyebrowX = offset.x + 44;
   let rEyebrowX = offset.x + 120;
@@ -164,32 +153,32 @@ export default function HighlightRange({
       />
       {/* Left eye */}
       <path
-        d={basis(lEyeMin) + basis(lEyeMax)}
+        d={basisCurve(lEyeMin) + basisCurve(lEyeMax)}
         fill={dValue.active && lEyeIn ? color : 'none'}
       />
       {/* Right eye */}
       <path
-        d={basis(rEyeMin) + basis(rEyeMax)}
+        d={basisCurve(rEyeMin) + basisCurve(rEyeMax)}
         fill={dValue.active && rEyeIn ? color : 'none'}
       />
       {/* Nose */}
       <path
-        d={cardinal(noseMin) + cardinal(noseMax)}
+        d={cardinalCurve(noseMin) + cardinalCurve(noseMax)}
         fill={dValue.active && noseIn ? color : 'none'}
       />
       {/* Left cheek */}
       <path
-        d={basis(lCheekMin) + basis(lCheekMax)}
+        d={basisCurve(lCheekMin) + basisCurve(lCheekMax)}
         fill={dValue.active && lCheekIn ? color : 'none'}
       />
       {/* Right cheek */}
       <path
-        d={basis(rCheekMin) + basis(rCheekMax)}
+        d={basisCurve(rCheekMin) + basisCurve(rCheekMax)}
         fill={dValue.active && rCheekIn ? color : 'none'}
       />
       {/* Mouth */}
       <path
-        d={cardinal(mouthMin) + cardinal(mouthMax)}
+        d={cardinalCurve(mouthMin) + cardinalCurve(mouthMax)}
         fill={dValue.active && mouthIn ? color : 'none'}
       />
     </g>
