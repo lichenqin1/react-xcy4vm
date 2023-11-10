@@ -1,0 +1,25 @@
+/* Dial */
+
+.dial > .body {
+  fill: #80807833;
+}
+
+.dial > .head {
+  cursor: grab;
+}
+
+.dial > .head > circle {
+  fill: #c0c0c0;
+  stroke: #808080;
+  stroke-width: 2px;
+}
+
+.dial > .head > polygon {
+  fill: #808080;
+}
+
+/* Face */
+
+.face {
+  border: 1px solid #000000;
+}
