@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter, Link, Route, Routes } from 'react-router-dom';
 
+import Chart from './chart';
 import Face from './face';
 import Star from './star';
 import Plot from './plot';
@@ -18,6 +19,7 @@ export default function Router({
   // Necessary property
   components = [
     { element: null, path: '' },
+    { element: <Chart />, path: 'chart' },
     { element: <Face />, path: 'face' },
     { element: <Star />, path: 'star' },
     { element: <Plot />, path: 'plot' },

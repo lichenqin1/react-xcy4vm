@@ -8,6 +8,7 @@ export default function PressCircle({
   interval = 100,
   offset = { x: 0, y: 0 },
   opacity = 1,
+  radius = 98,
   strokeWidth = 2,
   valueRange = [0, 10],
 }) {
@@ -52,7 +53,7 @@ export default function PressCircle({
       onMouseDown={pressStart}
       onMouseOut={pressStop}
       onMouseUp={pressStop}
-      r={98}
+      r={radius}
       stroke={color}
       strokeOpacity={opacity}
       strokeWidth={strokeWidth}

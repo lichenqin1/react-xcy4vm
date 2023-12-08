@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PressCircle from './press-circle';
+
 export default function Plot({
   // Necessary properties
   callback = (isCentroid) => console.log(isCentroid),
@@ -15,6 +17,7 @@ export default function Plot({
   // Optional properties
   color = '#000000',
   fromCentroid = false,
+  interval = 100,
   isClickable = true,
   scaleHeight = 5,
   split = 5,
@@ -22,13 +25,17 @@ export default function Plot({
   zoom = 1,
 }) {
   // Hook
-  let [isCentroid, setIsCentroid] = React.useState(fromCentroid);
+  let [value, setValue] = React.useState(fromCentroid ? 10 : 0);
 
   // Get size
   let rawWidth = 260;
   let rawHeight = 180;
   let width = rawWidth * zoom;
   let height = rawHeight * zoom;
+
+  // Get coefficients
+  let coef1 = !isClickable ? 1 : value / 10;
+  let coef2 = !isClickable ? 1 : 1 - value / 10;
 
   // Path functions
   let axis = (x, y1, y2) => {
@@ -79,14 +86,18 @@ export default function Plot({
   let scales = shortNames.map((_, i) => (
     <g className="scale" key={i}>
       {new Array(split + 1).fill(0).map((_, j) => {
-        let x = i * 50 + 30 - scaleHeight;
-        let y = 170 - (150 / split) * j;
-        let value = range.min[i] + ((range.max[i] - range.min[i]) / split) * j;
-        return (
-          <text key={j} x={x} y={y}>
-            {Math.round(value * 10) / 10}
-          </text>
-        );
+        if (Number.isFinite(range.max[i]) && Number.isFinite(range.min[i])) {
+          let x = i * 50 + 30 - scaleHeight;
+          let y = 170 - (150 / split) * j;
+          let value =
+            range.min[i] + ((range.max[i] - range.min[i]) / split) * j;
+          return (
+            <text key={j} x={x} y={y}>
+              {Math.round(value * 10) / 10}
+            </text>
+          );
+        }
+        return null;
       })}
     </g>
   ));
@@ -98,30 +109,46 @@ export default function Plot({
       fill="none"
       key={i}
       stroke={data.color}
-      strokeOpacity={data.opacity}
+      strokeOpacity={data.opacity * (i === 0 ? coef1 : coef2)}
       strokeWidth={strokeWidth}
     />
   ));
 
   // Callback effect
-  if (isClickable) {
-    React.useEffect(() => callback(isCentroid), [isCentroid]);
-  }
+  React.useEffect(() => {
+    if (isClickable) {
+      callback(value === 10);
+    }
+  }, [isClickable, value === 10]);
+
+  // Build press circle
+  let pressCircle = isClickable ? (
+    <PressCircle
+      callback={(value) => setValue(value)}
+      color="transparent"
+      interval={interval}
+      offset={{ x: 30, y: -30 }}
+      opacity={0}
+      radius={200}
+      strokeWidth={0}
+      valueRange={[fromCentroid ? 10 : 0, fromCentroid ? 0 : 10]}
+    />
+  ) : null;
 
   // Return Plot
   return (
     <svg
       className="plot"
       height={height}
-      onClick={isClickable ? () => setIsCentroid(!isCentroid) : () => {}}
       style={{ cursor: isClickable ? 'pointer' : 'inherit' }}
       viewBox={[0, 0, rawWidth, rawHeight]}
       width={width}
     >
       {axes}
       {headers}
-      {isClickable && isCentroid ? lines[0] : lines}
+      {lines}
       {scales}
+      {pressCircle}
     </svg>
   );
 }
